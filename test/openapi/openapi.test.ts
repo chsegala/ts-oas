@@ -1,6 +1,6 @@
 import { resolve } from "path";
 import { readFileSync, writeFileSync } from "fs";
-import { expect } from "chai";
+import { expect, use } from "chai";
 import SwaggerParser from "@apidevtools/swagger-parser";
 import TypescriptOAS, { createProgram } from "../../src";
 
