@@ -56,7 +56,6 @@ jobs:
             @chsegala:registry=https://npm.pkg.github.com
             always-auth=true
             EOF
-            npm version ${{ steps.semanticRelease.outputs.version }}
-            npm publish @chsegala/ts-oas
+            npm publish @chsegala/ts-oas@${{ steps.semanticRelease.outputs.version }}
         env:
             NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
