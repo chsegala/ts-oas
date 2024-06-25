@@ -48,5 +48,8 @@
     "build": "tsc",
     "dev": "tsc -w",
     "test": "mocha -t 3000 --require ts-node/register test/**/*.test.ts"
+  },
+  "publishConfig": {
+    "@chsegala:registry": "https://npm.pkg.github.com"
   }
 }
