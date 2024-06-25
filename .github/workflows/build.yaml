@@ -11,6 +11,11 @@ jobs:
   build:
     name: Build
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: write
+      packages: write
+      pages: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,21 +30,6 @@ jobs:
         run: npm install
       - name: Build and Test
         run: npm run build
-  release:
-    name: Release Package
-    runs-on: ubuntu-latest
-    needs: build
-    permissions:
-      id-token: write
-      contents: write
-      packages: write
-      pages: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-            ref: ${{ github.head_ref }}
-            fetch-depth: 0
       - name: Generate Version
         if: github.event_name == 'push'
         uses: go-semantic-release/action@v1
@@ -56,6 +46,6 @@ jobs:
             @chsegala:registry=https://npm.pkg.github.com
             always-auth=true
             EOF
-            npm publish @chsegala/ts-oas@${{ steps.semanticRelease.outputs.version }}
+            npm publish @chsegala/ts-oas
         env:
             NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
