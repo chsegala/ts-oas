@@ -43,7 +43,7 @@ jobs:
             update-file: package.json
             changelog-generator-opt: "emojis=true"
       - name: Publish Package
-        if: github.event_name == 'push' && steps.semanticRelease.outputs.version != ''
+        if: steps.semanticRelease.outputs.version != ''
         run: |
             cat << EOF >> .npmrc
             //npm.pkg.github.com/:_authToken=$NPM_AUTH_TOKEN
