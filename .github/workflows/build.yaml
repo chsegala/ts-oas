@@ -42,10 +42,10 @@ jobs:
         if: steps.semanticRelease.outputs.version != ''
         run: |
             cat << EOF >> .npmrc
-            //npm.pkg.github.com/:_authToken=$NPM_AUTH_TOKEN
+            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
             @chsegala:registry=https://npm.pkg.github.com
             always-auth=true
             EOF
             npm publish @chsegala/ts-oas
         env:
-            NPM_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
