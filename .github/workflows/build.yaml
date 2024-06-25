@@ -26,6 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
             node-version: "14.x"
+            registry-url: https://npm.pkg.github.com/
       - name: Install packages
         run: npm install
       - name: Build and Test
@@ -41,11 +42,6 @@ jobs:
       - name: Publish Package
         if: steps.semanticRelease.outputs.version != ''
         run: |
-            cat << EOF >> .npmrc
-            //npm.pkg.github.com/:_authToken=$NPM_TOKEN
-            @chsegala:registry=https://npm.pkg.github.com
-            always-auth=true
-            EOF
             npm publish @chsegala/ts-oas
         env:
             NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
